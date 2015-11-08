@@ -4,8 +4,9 @@ image: docker:///java#8
 inputs:
   - name: SpringBootTrader
 run:
-  path: SpringBootTrader/gradlew
-  args: ["build"]
+  path: ls 
+#  path: SpringBootTrader/gradlew
+#  args: ["build"]
 params:
   TERM: dumb
 
