@@ -4,6 +4,7 @@ image: docker:///java#8
 inputs:
   - name: SpringBootTrader-development
     path: .
+  - name: version
 run:
   path: ./gradlew
   args: ["build"]
