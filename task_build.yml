@@ -1,0 +1,16 @@
+---
+platform: linux
+image: docker:///java#8
+inputs:
+  - name: SpringBootTrader
+run:
+  path: SpringBootTrader/gradlew
+  args: ["build"]
+params:
+  TERM: dumb
+
+resources:
+- name: SpringBootTrader
+  type: git
+  source:
+    uri: https://github.com/dpinto-pivotal/cf-SpringBootTrader.git
