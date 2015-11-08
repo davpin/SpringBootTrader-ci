@@ -2,7 +2,7 @@
 platform: linux
 image: docker:///java#8
 inputs:
-  - name: SpringBootTrader
+  - name: SpringBootTrader-development
     path: .
 run:
   path: ./gradlew
