@@ -1,0 +1,5 @@
+trader-ci-repo-git: git@github.com:dpinto-pivotal/SpringBootTrader-ci.git
+trader-ci-repo: https://github.com/dpinto-pivotal/SpringBootTrader-ci.git
+trader-repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader.git
+app-version-file: version
+version-branch: version

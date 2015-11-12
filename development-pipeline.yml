@@ -21,20 +21,20 @@ resources:
 - name: SpringBootTrader-development
   type: git
   source:
-    uri: https://github.com/dpinto-pivotal/cf-SpringBootTrader.git
+    uri: {{trader-repo}}
     branch: development
 
 - name: SpringBootTrader-ci
   type: git
   source:
-    uri: https://github.com/dpinto-pivotal/SpringBootTrader-ci.git
+    uri:  {{trader-ci-repo}}
     branch: master
 
 - name: version
   type: semver
   source:
     driver: git
-    uri: git@github.com:dpinto-pivotal/SpringBootTrader-ci.git
-    branch: version
-    file: version
+    uri: {{trader-ci-repo-git}}
+    branch: {{version-branch}}
+    file: {{app-version-file}}
     private_key: {{springboottrader-ci-repo-private-key}}
