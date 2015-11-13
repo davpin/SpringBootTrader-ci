@@ -3,38 +3,51 @@ jobs:
 - name: Build
   public: true
   serial: true
+  serial_groups: ["build"]
   plan:
   - aggregate:
-    - get: SpringBootTrader-development
+    - get: source-code
       trigger: true
-    - get: SpringBootTrader-ci
+    - get: ci
       trigger: false
     - get: version
       trigger: false
       params: {bump: patch}
-  - task: build
+  - task: build-task
     file: SpringBootTrader-ci/task_build.yml
   - put: version
     params: {file: version/number}
-
+- name: Deploy
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: source-code
+      trigger: true
+      passed: [Build]
+  - task: deploy-task
+    config:
+      run:
+        path: ls
+        args: ["-lrt"]
 resources:
-- name: SpringBootTrader-development
+- name: source-code
   type: git
   source:
-    uri: {{trader-repo}}
-    branch: development
+    uri: {{code-repo}}
+    branch: {{code-branch}}
 
-- name: SpringBootTrader-ci
+- name: ci
   type: git
   source:
-    uri:  {{trader-ci-repo}}
+    uri:  {{ci-repo}}
     branch: master
 
 - name: version
   type: semver
   source:
     driver: git
-    uri: {{trader-ci-repo-git}}
+    uri: {{ci-repo-git}}
     branch: {{version-branch}}
     file: {{app-version-file}}
     private_key: {{springboottrader-ci-repo-private-key}}

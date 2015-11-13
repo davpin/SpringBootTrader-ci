@@ -2,7 +2,7 @@
 platform: linux
 image: docker:///java#8
 inputs:
-  - name: SpringBootTrader-development
+  - name: source-code
     path: .
   - name: version
 run:
