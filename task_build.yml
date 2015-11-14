@@ -7,9 +7,7 @@ inputs:
   - name: version
 outputs:
   -name: version
-   path: version/number
   -name: source-code
-   path: .
 run:
   path: ./gradlew
   args: ["build"]
