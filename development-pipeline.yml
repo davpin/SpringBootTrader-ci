@@ -3,7 +3,7 @@ jobs:
 - name: Build
   public: true
   serial: true
-#  serial_groups: ["build"]
+  serial_groups: ["build"]
   plan:
   - aggregate:
     - get: source-code
@@ -18,36 +18,34 @@ jobs:
 - name: Deploy
   public: true
   serial: true
-#  serial_groups: ["build"]
+  serial_groups: ["build"]
   plan:
   - aggregate:
-#    - get: source-code
-#      trigger: true
-#      passed: [Build]
-    - get: ci
-      trigger: false
+    - get: source-code
+      trigger: true
       passed: [Build]
     - get: version
       trigger: false
       passed: [Build]
   - task: Deploy123
+    platform: linux
     config:
        inputs:
-         - name: quotes-build
-           path: .
-         - name: accounts-build
-           path: .
+#         - name: quotes-build
+#           path: .
+#         - name: accounts-build
+#           path: .
          - name: version
        run:
          path: find
          args: ["."]
-  - aggregate:
-    - put: deploy-to-cf
-      params:
-        manifest: resource-web-app/manifest.yml
-        path: resource-web-app
-        environment_variables:
-          CF_TARGET: {{cf-api}}
+#  - aggregate:
+#    - put: deploy-to-cf
+#      params:
+#        manifest: resource-web-app/manifest.yml
+#        path: resource-web-app
+#        environment_variables:
+#          CF_TARGET: {{cf-api}}
 
   - put: version
     params: {file: version/number}
@@ -74,12 +72,12 @@ resources:
     file: {{app-version-file}}
     private_key: {{springboottrader-ci-repo-private-key}}
 
-- name: deploy-to-cf
-  type: cf
-  source:
-     api: {{cf-api}}
-     username: {{cf-username}}
-     password: {{cf-password}}
-     organization: {{cf-organisation}}
-     space: {{cf-space}}
-     skip_cert_check: {{cf-skip-ssl}}
+#- name: deploy-to-cf
+#  type: cf
+#  source:
+#     api: {{cf-api}}
+#     username: {{cf-username}}
+#     password: {{cf-password}}
+#     organization: {{cf-organisation}}
+#     space: {{cf-space}}
+#     skip_cert_check: {{cf-skip-ssl}}
