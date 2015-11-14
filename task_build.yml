@@ -8,10 +8,10 @@ inputs:
 outputs:
   - name: version
     path: version/number
-  - name: quotes-build
-    path: ./springboottrades-quotes/build/
-  - name: accounts-build
-    path: ./springboottrades-accounts/build/
+#  - name: quotes-build
+#    path: ./springboottrades-quotes/build/
+#  - name: accounts-build
+#    path: ./springboottrades-accounts/build/
 run:
   path: ./gradlew
   args: ["build"]
