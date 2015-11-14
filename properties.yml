@@ -4,3 +4,8 @@ code-repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader.git
 code-branch: development
 app-version-file: trader-version
 version-branch: version
+cf-api: https://api.emea-2.fe.gopivotal.com
+cf-username: dpinto
+cf-organisation: dpinto-org
+cf-space: trader
+cf-skip-ssl: true

@@ -12,11 +12,9 @@ jobs:
       trigger: false
     - get: version
       trigger: false
-      params: {bump: patch}
+      params: {bump: patch, pre: rc}
   - task: build-task
-    file: SpringBootTrader-ci/task_build.yml
-  - put: version
-    params: {file: version/number}
+    file: ci/task_build.yml
 - name: Deploy
   public: true
   serial: true
@@ -25,11 +23,17 @@ jobs:
     - get: source-code
       trigger: true
       passed: [Build]
+    - get: version
+      trigger: false
+      passed: [Build]
   - task: deploy-task
     config:
       run:
-        path: ls
-        args: ["-lrt"]
+        path: cat
+        args: ["version/number"]
+  - put: version
+    params: {file: version/number}
+
 resources:
 - name: source-code
   type: git
@@ -51,3 +55,13 @@ resources:
     branch: {{version-branch}}
     file: {{app-version-file}}
     private_key: {{springboottrader-ci-repo-private-key}}
+
+- name: deploy-to-cf
+  type: cf
+  source:
+     api: {{cf-api}}
+     username: {{cf-username}}
+     password: {{cf-password}}
+     organization: {{cf-organisation}}
+     space: {{cf-space}}
+     skip_cert_check: {{cf-skip-ssl}}

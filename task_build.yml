@@ -5,9 +5,12 @@ inputs:
   - name: source-code
     path: .
   - name: version
+outputs:
+  -name: version
+  -name: source-code
+   path: .
 run:
   path: ./gradlew
   args: ["build"]
 params:
   TERM: dumb
-
