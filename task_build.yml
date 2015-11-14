@@ -5,11 +5,11 @@ inputs:
   - name: source-code
     path: .
   - name: version
-outputs:
-  - name: version
-    path: version/number
-  - name: source-code
-    path: .
+#outputs:
+#  - name: version
+#    path: version/number
+#  - name: source-code
+#    path: .
 run:
   path: ./gradlew
   args: ["build"]
