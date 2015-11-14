@@ -29,8 +29,8 @@ jobs:
   - task: deploy-task
     config:
       run:
-        path: cat
-        args: ["version/number"]
+        path: find
+        args: ["."]
   - put: version
     params: {file: version/number}
 
