@@ -21,17 +21,32 @@ jobs:
 #  serial_groups: ["build"]
   plan:
   - aggregate:
-    - get: source-code
-      trigger: true
+#    - get: source-code
+#      trigger: true
+#      passed: [Build]
+    - get: ci
+      trigger: false
       passed: [Build]
     - get: version
       trigger: false
       passed: [Build]
-  - task: deploy-task
+  - task: Deploy123
     config:
-      run:
-        path: find
-        args: ["."]
+       inputs:
+         - name: quotes-jar
+           path: .
+         - name: version
+       run:
+         path: find
+         args: ["."]
+  - aggregate:
+    - put: deploy-to-cf
+      params:
+        manifest: resource-web-app/manifest.yml
+        path: resource-web-app
+        environment_variables:
+          CF_TARGET: {{cf-api}}
+
   - put: version
     params: {file: version/number}
 
@@ -57,12 +72,12 @@ resources:
     file: {{app-version-file}}
     private_key: {{springboottrader-ci-repo-private-key}}
 
-#- name: deploy-to-cf
-#  type: cf
-#  source:
-#     api: {{cf-api}}
-#     username: {{cf-username}}
-#     password: {{cf-password}}
-#     organization: {{cf-organisation}}
-#     space: {{cf-space}}
-#     skip_cert_check: {{cf-skip-ssl}}
+- name: deploy-to-cf
+  type: cf
+  source:
+     api: {{cf-api}}
+     username: {{cf-username}}
+     password: {{cf-password}}
+     organization: {{cf-organisation}}
+     space: {{cf-space}}
+     skip_cert_check: {{cf-skip-ssl}}

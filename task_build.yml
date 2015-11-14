@@ -5,11 +5,11 @@ inputs:
   - name: source-code
     path: .
   - name: version
-#outputs:
-#  - name: version
-#    path: version/number
-#  - name: source-code
-#    path: .
+outputs:
+  - name: version
+    path: version/number
+  - name: quotes-jar
+    path: ./springboottrades-quotes/build/libs/quotes*.jar
 run:
   path: ./gradlew
   args: ["build"]
