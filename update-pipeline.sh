@@ -1,1 +1,1 @@
-fly set-pipeline -p SpringBootTrader-development -c development-pipeline.yml -v "springboottrader-ci-repo-private-key=$(cat id_rsa)" -v "cf-password=ert123" -l properties.yml
+fly set-pipeline -p SpringBootTrader-development -c development-pipeline.yml -v "springboottrader-ci-repo-private-key=$(cat id_rsa)" -v "cf-password=ert123" -v "AWS-key-id=AKIAJI2ERDG2EQ2FW2ZQ" -v "AWS-secret=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" -l properties.yml
